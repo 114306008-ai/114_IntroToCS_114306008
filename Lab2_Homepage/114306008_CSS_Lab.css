@@ -1,0 +1,94 @@
+/* ---- Body---- */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+}
+
+/* ---- Header---- */
+.header {
+    background-color: #6FA8DC;
+    padding: 40px;
+    text-align: center;
+    color: white;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 48px;
+}
+
+.header p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* ---- Navigation Bar ---- */
+.navbar {
+    margin: 0;
+    padding: 0;
+    background-color: #1f2a44;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.navbar li {
+    position: relative; 
+}
+/* ---- 連結樣式 ---- */
+.navbar a {
+    display: block;
+    padding: 14px 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    background-color: #2e3b57;
+}
+
+/* ---- Dropdown ---- */
+/* ---- 下拉區一開始隱藏 ---- */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;            
+    left: 0;
+    background-color: #1f2a44;
+    min-width: 220px;
+    border-radius: 10px;
+    margin-top: 6px;
+}
+
+/* ---- 下拉選項樣式 ---- */
+.dropdown-content a {
+    padding: 16px;
+    display: block;
+    color: white;
+    font-size: 18px;
+}
+
+.dropdown-content a:hover {
+    background-color: #2e3b57;
+    border-radius: 10px;
+}
+
+.navbar li:hover .dropdown-content {
+    display: block;
+}
+
+/* ---- Page Content ---- */
+.content {
+    padding: 40px;
+    font-size: 20px;
+}
+
+.email {
+    background-color: #b3cdf7;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
