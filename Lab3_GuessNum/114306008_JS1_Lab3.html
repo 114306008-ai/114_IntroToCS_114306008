@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Number Guessing Game</title>
+</head>
+
+<body>
+    <h1>114306008_Number Guessing Game</h1>
+    <div id="result"></div>
+
+<script>
+var answer = Math.floor(Math.random() * 100) + 1;
+var chances = 7;
+var low = 1;
+var high = 100;
+
+while (chances > 0) {
+    var input = window.prompt("請輸入 " + low + " 到 " + high + " 之間的整數。\n" + "你還有 " + chances + " 次機會。"
+    );
+
+    //取消
+    if (input === null) {
+        alert("遊戲已取消！");
+        break;
+    }
+
+    input = input.trim();
+
+    //無輸入 or 非數字
+    if (input === "" || isNaN(input)) {
+        alert("請輸入有效範圍內的數字 (不能超出 1 到 100 )！");
+        continue;
+    }
+
+    var guess = Number(input);
+
+    //範圍外
+    if (guess < low || guess > high) {
+        alert("請輸入 " + low + " 到 " + high + " 之間的數字！");
+        continue;
+    }
+
+    //猜中
+    if (guess === answer) {
+        alert("恭喜你答對了！正確答案是 " + answer);
+        document.getElementById("result").innerHTML = '<img src="correct.jpg" width="500">';
+        break;
+    } 
+    //太大
+    else if (guess > answer) {
+        high = guess - 1;
+    }
+    //太小
+    else {
+        low = guess + 1;
+    }
+
+    chances--;
+}
+
+//機會用完沒猜中
+if (chances === 0) {
+    alert("正確答案是 " + answer);
+    document.getElementById("result").innerHTML ='<img src="wrong.jpg" width="500">';
+}
+</script>
+
+</body>
+</html>
