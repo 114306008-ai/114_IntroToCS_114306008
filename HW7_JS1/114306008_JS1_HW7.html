@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1A2B Game</title>
+</head>
+
+<body>
+
+<h1>114306008_HW7_1A2B</h1>
+
+<label for="userInput">Enter 4 unique numbers</label>
+<input id="userInput" type="text">
+<button onclick="play()">Guess!</button>
+
+<p>Game Record:</p>
+<div id="record"></div>
+
+<script>
+// 產生四位不重複的答案
+function generateAnswer() {
+    var pool = ["0","1","2","3","4","5","6","7","8","9"];  // 可用數字
+    var ans = "";                                          // 最終答案
+
+    // 重複抽四次
+    while (ans.length < 4) {
+
+        // 隨機挑一個 index
+        var index = Math.floor(Math.random() * pool.length);
+
+        // 加到答案
+        ans += pool[index];
+
+        // 把用過的數字從 pool 移除（避免重複）
+        pool.splice(index, 1);
+    }
+    return ans;
+}
+
+// 產生答案
+var answer = generateAnswer();
+var count = 0; // 記錄猜了幾次
+
+// 檢查輸入是否合法
+function isValid(str) {
+
+    // 1. 必須是 4 位
+    if (str.length !== 4) {
+        return false;
+    }
+
+    // 2. 必須都是數字
+    for (var i = 0; i < str.length; i++) {
+        var ch = str[i];
+        if (ch < "0" || ch > "9") {    // 如果不是 0~9
+            return false;
+        }
+    }
+
+    // 3. 檢查是否有重複數字
+    for (var a = 0; a < 4; a++) {
+        for (var b = a + 1; b < 4; b++) {
+            if (str[a] === str[b]) {
+                return false;
+            }
+        }
+    }
+
+    return true; // 全部通過 = 合法
+}
+
+// 計算幾 A 幾 B
+function checkAB(guess, ans) {
+    var A = 0;
+    var B = 0;
+
+    for (var i = 0; i < 4; i++) {
+        // 數字＋位置都正確
+        if (guess[i] === ans[i]) {
+            A++; 
+        }
+        else {
+            // 如果 guess[i] 出現在答案中（但位置不同）
+            for (var j = 0; j < 4; j++) {
+                if (guess[i] === ans[j]) {
+                    B++;
+                    break;
+                }
+            }
+        }
+    }
+
+    return A + "A" + B + "B";
+}
+
+// 主程式
+function play() {
+    var inputBox = document.getElementById("userInput");
+    var guess = inputBox.value.trim();    // 去除空白
+
+    // 檢查輸入
+    if (!isValid(guess)) {
+        alert("Error!");
+        inputBox.value = "";
+        return;
+    }
+
+    count++; // 猜的次數加一
+
+    // 計算結果
+    var result = checkAB(guess, answer);
+
+    // 顯示在紀錄區
+    document.getElementById("record").innerHTML += "<p>第 " + count + " 次：" + guess + " → " + result + "</p>";
+
+    // 全對
+    if (result === "4A0B") {
+        alert("恭喜你猜對了！總共猜了 " + count + " 次。");
+    }
+
+    inputBox.value = "";  // 清空輸入框
+}
+
+</script>
+
+</body>
+</html>
